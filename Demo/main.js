@@ -9,11 +9,11 @@ class demo{
     //Khởi tạo
     init(){
         this.canvas=document.createElement('canvas');
-        this.canvas.width=800;
+        this.canvas.width=1000;
         this.canvas.height=1000;
         this.context=this.canvas.getContext('2d');
         document.body.appendChild(this.canvas);
-        for(let i=0;i<800;i++)
+        for(let i=0;i<100;i++)
         {
             this.arr.push(i);
             this.color.push(3);//chưa sắp
@@ -31,72 +31,75 @@ class demo{
         if(start<end)
         {
             const mid=Math.floor((start+end)/2);
-            for(let i=start;i<mid;i++)
-                this.color[i]=1;//Màu vàng tách ra merge
             await this.mergeSort(arr,start,mid);
-            for(let i=mid+1;i<end+1;i++)
-                this.color[i]=1;//Màu vàng tách ra merge
+            // for(let i=mid+1;i<end+1;i++)
+            //     this.color[i]=1;//Màu vàng tách ra merge
             await this.mergeSort(arr,mid+1,end);
             await this.unMerge(arr,start,mid,end);
-            for(let i=start;i<end+1;i++)
-                this.color[i]=0;//Màu đỏ đã unMerge
+            // for(let i=start;i<end+1;i++)
+            //     this.color[i]=0;//Màu đỏ đã unMerge
+            //this.color[start]=0;
+            //this.color[end]=0;
         }
       
     }
     async unMerge(arr,start,mid,end){
-        
+        this.color[start]=1;
+        this.color[end]=1;
         let n1=mid-start+1;
         let n2=end-mid;
         const L=[];
         const R=[];
         for (let i = 0; i < n1; ++i) 
         {
-            await this.sleep(5)
-            L.push(arr[start + i]); 
-            this.color[start + i]=2;
+            L.push(arr[start + i]);
         }
-             
         for (let j = 0; j < n2; ++j) 
         {
-            await this.sleep(5)
             R.push(arr[mid+ 1 + j]);
-            this.color[mid+ 1 + j]=2;
         }
-            
-
         let i = 0, j = 0; 
         let k=start;
         while (i<n1&&j<n2) {
             while (i < n1 && j < n2) { 
-                await this.sleep(5)
+                //await this.sleep(100)
                 if (L[i] <= R[j]) { 
-                    
                     arr[k] = L[i]; 
+                    await this.sleep(100)        
                     i++; 
                 } 
                 else { 
                     arr[k] = R[j]; 
+                    await this.sleep(100)
                     j++; 
-                } 
-                k++; 
-                this.color[i]=0;
+                }                
+                k++;
+                await this.sleep(100) 
+                this.color[k]=2;
+                this.color[k-1]=0;
             } 
            
         }
         while (i < n1) { 
-            await this.sleep(5)
+            await this.sleep(100)
             arr[k] = L[i]; 
             i++; 
+            this.color[k]=2;
+            this.color[k-1]=0;
             k++; 
-            this.color[i]=0;
         } 
         while (j < n2) { 
-            await this.sleep(5)
+            await this.sleep(100)
             arr[k] = R[j]; 
             j++; 
+            this.color[k]=2;
+            this.color[k-1]=0;
             k++; 
-            this.color[j]=0;
-        } 
+            
+        }
+        await this.sleep(100)
+        this.color[start]=0;
+        this.color[end]=0;
     }
     //Vòng lặp
     loop(){
@@ -104,23 +107,21 @@ class demo{
         setTimeout(()=>this.loop(),10)// cứ 10fps gọi lại hàm draw vẽ lại
     }
     //xóa màn hình
-    clearSreen()
+    clearScreen()
     {
-        this.context.fillStyle="#ffffff"
-        this.context.fillRect(0,0,800,1000);
+        this.context.fillStyle="#000000"
+        this.context.fillRect(0,0,1000,1000);
     }
      draw(){
-        this.clearSreen();
+        this.clearScreen();
         for (let i = 0; i < this.arr.length; i++) {
             this.context.beginPath();
             if(this.color[i]==1)
-                this.context.fillStyle="#ffff00";
-            else if(this.color[i]==0)
-                this.context.fillStyle="#ff0000";
-            else if(this.color[i]==2) 
-                this.context.fillStyle="#0000ff";
-            else  this.context.fillStyle="#000000";
-            this.context.fillRect(i,800,2,-this.arr[i]);
+                this.context.fillStyle ="#ff0000";
+            else if(this.color[i]==2)
+                this.context.fillStyle ="#ff00ff";
+            else this.context.fillStyle ="#ffffff";
+            this.context.fillRect(i*11,500,10,-this.arr[i]*5)
             this.context.stroke();
         }
     }
