@@ -9,7 +9,7 @@ class demo{
     //Khởi tạo
     init(){
         this.canvas=document.createElement('canvas');
-        this.canvas.width=1000;
+        this.canvas.width=1200;
         this.canvas.height=1000;
         this.context=this.canvas.getContext('2d');
         document.body.appendChild(this.canvas);
@@ -110,7 +110,7 @@ class demo{
     clearScreen()
     {
         this.context.fillStyle="#000000"
-        this.context.fillRect(0,0,1000,1000);
+        this.context.fillRect(0,0,1200,1000);
     }
      draw(){
         this.clearScreen();
