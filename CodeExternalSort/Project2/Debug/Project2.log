@@ -1,0 +1,6 @@
+﻿  MergeFile.cpp
+C:\Users\o0oKenZyo0o\source\repos\Project2\Project2\MergeFile.cpp(122,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  MinHeap.cpp
+  main.cpp
+  Generating Code...
+  Project2.vcxproj -> C:\Users\o0oKenZyo0o\source\repos\Project2\Debug\Project2.exe
