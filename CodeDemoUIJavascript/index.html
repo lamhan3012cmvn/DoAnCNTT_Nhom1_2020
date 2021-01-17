@@ -1,13 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-   
-</body>
-<script type="text/javascript" src="main.js"></script>
-   
+    <style>
+      body {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+      }
+      .setting {
+        width: 30%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: relative;
+      }
+      .setting h2 {
+        position: absolute;
+        top: 30px;
+        font-size: 30px;
+      }
+      .setting div {
+        margin-bottom: 20px;
+      }
+      .setting div label {
+        margin-right: 10px;
+      }
+      .btn {
+        font-size: 20px;
+        color: black;
+        padding: 5px 20px;
+      }
+      .demo {
+        width: 70%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* background: #000; */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="setting">
+      <h2>Demo Merge Sort</h2>
+      <div class="InputSize">
+        <label for="">Size (px)</label>
+        <input type="text" id="size" />
+      </div>
+      <div class="InputTimeDelay">
+        <label for="">Delay (s)</label>
+        <input type="text" name="delay" id="delay" />
+      </div>
+
+      <div>
+        <button id="btn_run" class="btn">Run</button>
+      </div>
+    </div>
+    <div class="demo">
+      <script type="text/javascript" src="main.js"></script>
+    </div>
+    <script>
+      var btn = document
+        .getElementById("btn_run")
+        .addEventListener("click", () => {
+          const d = document.querySelector(".demo");
+          d.innerHTML = "";
+          const size = document.querySelector("#size").value;
+          const delay = document.querySelector("#delay").value;
+          if (!/^[1-5]{1}$/.test(size)) {
+            window.alert("Size [0-5]");
+            return;
+          }
+          if (!/^[5-9]{1}$/.test(delay)) {
+            window.alert("Delay [0-5]");
+            return;
+          }
+          const width = (d.clientWidth * 70) / 100;
+          const height = (d.clientHeight * 90) / 100;
+          const Demo = new demo(width, height, size, delay);
+          Demo.init();
+        });
+    </script>
+  </body>
 </html>
